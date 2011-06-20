@@ -255,7 +255,6 @@ private:
   PDEDeformableRegistrationFilter(const Self &); //purposely not implemented
   void operator=(const Self &);                  //purposely not implemented
 
-protected:
   /** Standard deviation for Gaussian smoothing */
   StandardDeviationsType m_StandardDeviations;
   StandardDeviationsType m_UpdateFieldStandardDeviations;
@@ -267,7 +266,7 @@ protected:
   /** Temporary deformation field use for smoothing the
    * the deformation field. */
   DeformationFieldPointer m_TempField;
-
+private:
   /** Maximum error for Gaussian operator approximation. */
   double m_MaximumError;
 

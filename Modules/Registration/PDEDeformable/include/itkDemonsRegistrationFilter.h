@@ -135,12 +135,11 @@ protected:
   /** Apply update. */
   virtual void ApplyUpdate(const TimeStepType& dt);
 
-  bool m_UseMovingImageGradient;
-
 private:
   DemonsRegistrationFilter(const Self &); //purposely not implemented
   void operator=(const Self &);           //purposely not implemented
 
+  bool m_UseMovingImageGradient;
 };
 } // end namespace itk
 
