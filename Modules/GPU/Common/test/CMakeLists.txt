@@ -1,5 +1,13 @@
 IF(ITK_USE_GPU)
 
+# With MS compilers on Win64, we need the /bigobj switch, else generated
+# code results in objects with number of sections exceeding object file
+# format.
+# see http://msdn.microsoft.com/en-us/library/ms173499.aspx
+if(CMAKE_CL_64 OR CMAKE_COMPILER_2005)
+add_definitions(/bigobj)
+endif()
+ 
 create_test_sourcelist(Tests ITKGPUCommon-tests.cxx
 itkGPUImageTest.cxx
 itkGPUImageFilterTest.cxx
@@ -16,7 +24,7 @@ target_link_libraries(ITKGPUCommon-tests  ${ITKGPUCommon_LIBRARIES} )
 itk_add_test(NAME itkGPUImageFilterTest
         COMMAND ITKGPUCommon-tests itkGPUImageFilterTest
         ${ITK_EXAMPLE_DATA_ROOT}/BrainProtonDensitySlice.png
-        ${TEMP}/gpuImageFilterTest.png)
+       ${TEMP}/gpuImageFilterTest.png)
 
 #add_test(NAME itkGPUImageTest COMMAND ITK-GPUCommonTestDriver itkGPUImageTest)
 #
