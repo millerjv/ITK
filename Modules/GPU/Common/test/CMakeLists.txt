@@ -7,12 +7,13 @@ IF(ITK_USE_GPU)
 if(CMAKE_CL_64 OR CMAKE_COMPILER_2005)
 add_definitions(/bigobj)
 endif()
- 
+
 create_test_sourcelist(Tests ITKGPUCommon-tests.cxx
 itkGPUImageTest.cxx
 itkGPUImageFilterTest.cxx
 itkGPUMeanImageFilterTest.cxx
 itkGPUBinaryThresholdImageFilterTest.cxx
+itkGPUNeighborhoodOperatorImageFilterTest.cxx
 itkGPUGradientAnisotropicDiffusionImageFilterTest.cxx
 itkGPUDemonsRegistrationFilterTest.cxx
 )
@@ -43,6 +44,11 @@ add_test(NAME itkGPUBinaryThresholdImageFilterTest
         COMMAND ITK-GPUCommonTestDriver itkGPUBinaryThresholdImageFilterTest
         ${ITK_SOURCE_DIR}/Examples/Data/BrainProtonDensitySlice.png
         ${TEMP}/gpuBinaryThresholdImageFilterTest.png)
+
+add_test(NAME itkGPUNeighborhoodOperatorImageFilterTest
+        COMMAND ITK-GPUCommonTestDriver itkGPUNeighborhoodOperatorImageFilterTest
+        ${ITK_SOURCE_DIR}/Examples/Data/BrainProtonDensitySlice.png
+        ${TEMP}/gpuGradientAnisotropicDiffusionImageFilterTest.png)
 
 add_test(NAME itkGPUGradientAnisotropicDiffusionImageFilterTest
         COMMAND ITK-GPUCommonTestDriver itkGPUGradientAnisotropicDiffusionImageFilterTest
