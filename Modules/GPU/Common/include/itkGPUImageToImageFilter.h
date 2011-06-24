@@ -56,6 +56,8 @@ public:
 
   void GenerateData();
 
+  virtual void GraftOutput(DataObject *output);
+
 protected:
   GPUImageToImageFilter();
   ~GPUImageToImageFilter();
@@ -63,6 +65,8 @@ protected:
   virtual void PrintSelf(std::ostream & os, Indent indent) const;
 
   virtual void GPUGenerateData() {};
+
+
 
   // GPU kernel manager
   typename GPUKernelManager::Pointer m_GPUKernelManager;
