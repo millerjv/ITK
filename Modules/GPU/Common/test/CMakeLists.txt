@@ -14,7 +14,8 @@ itkGPUImageFilterTest.cxx
 itkGPUMeanImageFilterTest.cxx
 itkGPUBinaryThresholdImageFilterTest.cxx
 itkGPUNeighborhoodOperatorImageFilterTest.cxx
-itkGPUGradientAnisotropicDiffusionImageFilterTest.cxx
+ itkGPUDiscreteGaussianImageFilterTest.cxx
+ itkGPUGradientAnisotropicDiffusionImageFilterTest.cxx
 itkGPUDemonsRegistrationFilterTest.cxx
 )
 
@@ -47,6 +48,11 @@ add_test(NAME itkGPUBinaryThresholdImageFilterTest
 
 add_test(NAME itkGPUNeighborhoodOperatorImageFilterTest
         COMMAND ITK-GPUCommonTestDriver itkGPUNeighborhoodOperatorImageFilterTest
+        ${ITK_SOURCE_DIR}/Examples/Data/BrainProtonDensitySlice.png
+        ${TEMP}/gpuGradientAnisotropicDiffusionImageFilterTest.png)
+
+add_test(NAME itkGPUDiscreteGaussianImageFilterTest
+        COMMAND ITK-GPUCommonTestDriver itkGPUDiscreteGaussianImageFilterTest
         ${ITK_SOURCE_DIR}/Examples/Data/BrainProtonDensitySlice.png
         ${TEMP}/gpuGradientAnisotropicDiffusionImageFilterTest.png)
 
