@@ -265,3 +265,114 @@ void OclCheckError(cl_int error)
       assert( false );
     }
 }
+
+/** Check if OpenCL-enabled GPU is present. */
+bool IsGPUAvailable()
+{
+  cl_platform_id platformId = OclSelectPlatform("NVIDIA");
+
+  if(platformId == NULL) return false;
+
+  cl_device_type devType = CL_DEVICE_TYPE_GPU;
+
+  // Get the devices
+  cl_uint numDevices;
+  OclGetAvailableDevices(platformId, devType, &numDevices);
+
+  if(numDevices < 1) return false;
+
+  return true;
+}
+
+void GetTypenameInString( const type_info& intype, std::ostringstream& ret )
+{
+  if ( intype == typeid ( unsigned char ) ||
+       intype == typeid ( itk::Vector< unsigned char, 2 > ) ||
+       intype == typeid ( itk::Vector< unsigned char, 3 > ) )
+  {
+    ret << "unsigned char\n";
+  }
+  else if ( intype == typeid ( char ) ||
+            intype == typeid ( itk::Vector< char, 2 > ) ||
+            intype == typeid ( itk::Vector< char, 3 > ) )
+  {
+    ret << "char\n";
+  }
+  else if ( intype == typeid ( short ) ||
+            intype == typeid ( itk::Vector< short, 2 > ) ||
+            intype == typeid ( itk::Vector< short, 3 > ) )
+  {
+    ret << "short\n";
+  }
+  else if ( intype == typeid ( int ) ||
+            intype == typeid ( itk::Vector< int, 2 > ) ||
+            intype == typeid ( itk::Vector< int, 3 > ) )
+  {
+    ret << "int\n";
+  }
+  else if ( intype == typeid ( unsigned int ) ||
+            intype == typeid ( itk::Vector< unsigned int, 2 > ) ||
+            intype == typeid ( itk::Vector< unsigned int, 3 > ) )
+  {
+    ret << "unsigned int\n";
+  }
+  else if ( intype == typeid ( float ) ||
+            intype == typeid ( itk::Vector< float, 2 > ) ||
+            intype == typeid ( itk::Vector< float, 3 > ) )
+  {
+    ret << "float\n";
+  }
+  else if ( intype == typeid ( double ) ||
+            intype == typeid ( itk::Vector< double, 2 > ) ||
+            intype == typeid ( itk::Vector< double, 3 > ) )
+  {
+    ret << "double\n";
+
+    // enable 64bit computation
+    ret << "#pragma OPENCL EXTENSION cl_khr_fp64 : enable\n";
+    ret << "#pragma OPENCL EXTENSION cl_amd_fp64 : enable\n";
+  }
+  else
+  {
+    //std::cerr << "Pixeltype is not supported by GPUMeanImageFilter." << std::endl;
+    itkGenericExceptionMacro("Pixeltype is not supported by the filter.");
+  }
+}
+
+int GetPixelDimension( const type_info& intype )
+{
+  if ( intype == typeid ( unsigned char ) ||
+       intype == typeid ( char ) ||
+       intype == typeid ( short ) ||
+       intype == typeid ( int ) ||
+       intype == typeid ( unsigned int ) ||
+       intype == typeid ( float ) ||
+       intype == typeid ( double ) )
+  {
+    return 1;
+  }
+  else if( intype == typeid ( itk::Vector< unsigned char, 2 > ) ||
+           intype == typeid ( itk::Vector< char, 2 > ) ||
+           intype == typeid ( itk::Vector< short, 2 > ) ||
+           intype == typeid ( itk::Vector< int, 2 > ) ||
+           intype == typeid ( itk::Vector< unsigned int, 2 > ) ||
+           intype == typeid ( itk::Vector< float, 2 > ) ||
+           intype == typeid ( itk::Vector< double, 2 > ) )
+  {
+    return 2;
+  }
+  else if( intype == typeid ( itk::Vector< unsigned char, 3 > ) ||
+           intype == typeid ( itk::Vector< char, 3 > ) ||
+           intype == typeid ( itk::Vector< short, 3 > ) ||
+           intype == typeid ( itk::Vector< int, 3 > ) ||
+           intype == typeid ( itk::Vector< unsigned int, 3 > ) ||
+           intype == typeid ( itk::Vector< float, 3 > ) ||
+           intype == typeid ( itk::Vector< double, 3 > ) )
+  {
+    return 3;
+  }
+  else
+  {
+    itkGenericExceptionMacro("Pixeltype is not supported by the filter.");
+  }
+}
