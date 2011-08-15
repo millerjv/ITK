@@ -15,6 +15,7 @@ IF (ITK_USE_GPU)
 
   # OpenCL source file location - using relative path to make the code portable
   FILE(COPY ${itkGPUSRC} DESTINATION ${ITK_BINARY_DIR}/bin/OpenCL)
+  FILE(COPY ${itkGPUSRC} DESTINATION ${ITK_BINARY_DIR}/bin/../OpenCL)
   FILE(COPY ${itkGPUSRC} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/OpenCL)
 
   MESSAGE( "OpenCL source files to copy : " ${itkGPUSRC})
