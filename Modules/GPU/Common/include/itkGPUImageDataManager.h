@@ -87,7 +87,7 @@ private:
 } // namespace itk
 
 #if ITK_TEMPLATE_TXX
-#include "itkGPUImageDataManager.txx"
+#include "itkGPUImageDataManager.hxx"
 #endif
 
 #endif

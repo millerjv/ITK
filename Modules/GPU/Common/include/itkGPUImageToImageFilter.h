@@ -84,7 +84,7 @@ private:
 } // end namespace itk
 
 #if ITK_TEMPLATE_TXX
-#include "itkGPUImageToImageFilter.txx"
+#include "itkGPUImageToImageFilter.hxx"
 #endif
 
 #endif

@@ -276,7 +276,7 @@ public:
 } // end namespace itk
 
 #if ITK_TEMPLATE_TXX
-#include "itkGPUImage.txx"
+#include "itkGPUImage.hxx"
 #endif
 
 #endif
