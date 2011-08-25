@@ -97,7 +97,7 @@ protected:
 
   /** GPU kernel manager for GPUFiniteDifferenceFunction class */
   typename GPUKernelManager::Pointer m_GPUKernelManager;
-  typename GPUDataPointer m_GPUDataManager;
+  GPUDataPointer m_GPUDataManager;
 
   /* GPU kernel handle for GPUComputeUpdate */
   int m_ReduceGPUKernelHandle;

@@ -80,7 +80,7 @@ typedef itk::Image<  VectorPixelType, Dimension >       CPUDeformationFieldType;
 itk::SmartPointer<GPUDeformationFieldType> itkGPUDemons(int argc, char *argv[], unsigned int &size);
 itk::SmartPointer<CPUDeformationFieldType> itkCPUDemons(int argc, char *argv[], unsigned int &size);
 
-char *AppendFileName(char *src, char *postfix)
+char *AppendFileName(const char *src, const char *postfix)
 {
   char *dest = new char[strlen(src) + strlen(postfix) + 1];
   char *pos = strrchr(src, '.');

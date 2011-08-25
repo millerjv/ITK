@@ -27,7 +27,7 @@ class ITK_EXPORT GPUMeanImageFilter : //public GPUImageToImageFilter<
 public:
   /** Standard class typedefs. */
   typedef GPUMeanImageFilter                                                                               Self;
-  typedef GPUImageToImageFilter< TInputImage, TOutputImage, MeanImageFilter< TInputImage, TOutputImage > > Superclass;
+  typedef GPUBoxImageFilter< TInputImage, TOutputImage, MeanImageFilter< TInputImage, TOutputImage > > Superclass;
   typedef SmartPointer< Self >                                                                             Pointer;
   typedef SmartPointer< const Self >                                                                       ConstPointer;
 

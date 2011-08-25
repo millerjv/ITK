@@ -126,7 +126,7 @@ GPUReduction< TElement >
   unsigned int handle = this->m_GPUKernelManager->CreateKernel(kernelName.str().c_str() );
 
   size_t wgSize;
-  cl_int ciErrNum = this->m_GPUKernelManager->GetKernelWorkGroupInfo(handle, CL_KERNEL_WORK_GROUP_SIZE, &wgSize);
+  /*cl_int ciErrNum = */ this->m_GPUKernelManager->GetKernelWorkGroupInfo(handle, CL_KERNEL_WORK_GROUP_SIZE, &wgSize);
   m_SmallBlock = (wgSize == 64);
 
   // NOTE: the program will get deleted when the kernel is also released
@@ -249,7 +249,7 @@ GPUReduction< TElement >
   bool cpuFinalReduction = true;
   int  cpuFinalThreshold = 1;
 
-  unsigned long bytes = size * sizeof(TElement);
+//  unsigned long bytes = size * sizeof(TElement);
 
   int numBlocks = 0;
   int numThreads = 0;
@@ -275,7 +275,7 @@ GPUReduction< TElement >
                                 cpuFinalThreshold, &dTotalTime,
                                 m_GPUDataManager, odata);
 
-  double reduceTime = dTotalTime;
+  // double reduceTime = dTotalTime;
 
   // cleanup
   free(h_odata);

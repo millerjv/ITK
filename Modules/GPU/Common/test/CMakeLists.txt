@@ -8,7 +8,8 @@ if(CMAKE_CL_64 OR CMAKE_COMPILER_2005)
 add_definitions(/bigobj)
 endif()
 
-create_test_sourcelist(Tests ITKGPUCommon-tests.cxx
+itk_module_test()
+set(ITKGPUCommonTests
 itkGPUImageTest.cxx
 itkGPUImageFilterTest.cxx
 itkGPUMeanImageFilterTest.cxx
@@ -19,53 +20,46 @@ itkGPUGradientAnisotropicDiffusionImageFilterTest.cxx
 itkGPUDemonsRegistrationFilterTest.cxx
 )
 
-add_executable(ITKGPUCommon-tests  ${Tests} )
-itk_module_target_label(ITKGPUCommon-tests)
-target_link_libraries(ITKGPUCommon-tests  ${ITKGPUCommon_LIBRARIES} )
+include_directories(${OPENCL_INCLUDE_DIRS} ${CMAKE_CURRENT_BINARY_DIR}/../)
+
+CreateTestDriver(ITKGPUCommon "${ITKGPUCommon-Test_LIBRARIES}" "${ITKGPUCommonTests}")
+
 
 itk_add_test(NAME itkGPUImageFilterTest
-        COMMAND ITKGPUCommon-tests itkGPUImageFilterTest
+        COMMAND ITKGPUCommonTestDriver itkGPUImageFilterTest
         ${ITK_EXAMPLE_DATA_ROOT}/BrainProtonDensitySlice.png
-       ${TEMP}/gpuImageFilterTest.png)
+       ${ITK_TEST_OUTPUT_DIR}/gpuImageFilterTest.png)
 
-#add_test(NAME itkGPUImageTest COMMAND ITK-GPUCommonTestDriver itkGPUImageTest)
-#
-#temporary test
-#add_test(NAME itkGPUImageFilterTestTemp
-#        COMMAND ITK-GPUCommonTestDriver itkGPUImageFilterTestTemp
-#        ${ITK_SOURCE_DIR}/Examples/Data/BrainProtonDensitySlice.png
-#        ${TEMP}/gpuImageFilterTest.png)
-
-add_test(NAME itkGPUMeanImageFilterTest
-        COMMAND ITK-GPUCommonTestDriver itkGPUMeanImageFilterTest
+itk_add_test(NAME itkGPUMeanImageFilterTest
+        COMMAND ITKGPUCommonTestDriver itkGPUMeanImageFilterTest
         ${ITK_SOURCE_DIR}/Examples/Data/BrainProtonDensitySlice.png
-        ${TEMP}/gpuMeanImageFilterTest.png)
+        ${ITK_TEST_OUTPUT_DIR}/gpuMeanImageFilterTest.png)
 
-add_test(NAME itkGPUBinaryThresholdImageFilterTest
-        COMMAND ITK-GPUCommonTestDriver itkGPUBinaryThresholdImageFilterTest
+itk_add_test(NAME itkGPUBinaryThresholdImageFilterTest
+        COMMAND ITKGPUCommonTestDriver itkGPUBinaryThresholdImageFilterTest
         ${ITK_SOURCE_DIR}/Examples/Data/BrainProtonDensitySlice.png
-        ${TEMP}/gpuBinaryThresholdImageFilterTest.png)
+        ${ITK_TEST_OUTPUT_DIR}/gpuBinaryThresholdImageFilterTest.png)
 
-add_test(NAME itkGPUNeighborhoodOperatorImageFilterTest
-        COMMAND ITK-GPUCommonTestDriver itkGPUNeighborhoodOperatorImageFilterTest
+itk_add_test(NAME itkGPUNeighborhoodOperatorImageFilterTest
+        COMMAND ITKGPUCommonTestDriver itkGPUNeighborhoodOperatorImageFilterTest
         ${ITK_SOURCE_DIR}/Examples/Data/BrainProtonDensitySlice.png
-        ${TEMP}/gpuGradientAnisotropicDiffusionImageFilterTest.png)
+        ${ITK_TEST_OUTPUT_DIR}/gpuGradientAnisotropicDiffusionImageFilterTest.png)
 
-add_test(NAME itkGPUDiscreteGaussianImageFilterTest
-        COMMAND ITK-GPUCommonTestDriver itkGPUDiscreteGaussianImageFilterTest
+itk_add_test(NAME itkGPUDiscreteGaussianImageFilterTest
+        COMMAND ITKGPUCommonTestDriver itkGPUDiscreteGaussianImageFilterTest
         ${ITK_SOURCE_DIR}/Examples/Data/BrainProtonDensitySlice.png
-        ${TEMP}/gpuGradientAnisotropicDiffusionImageFilterTest.png)
+        ${ITK_TEST_OUTPUT_DIR}/gpuGradientAnisotropicDiffusionImageFilterTest.png)
 
-add_test(NAME itkGPUGradientAnisotropicDiffusionImageFilterTest
-        COMMAND ITK-GPUCommonTestDriver itkGPUGradientAnisotropicDiffusionImageFilterTest
+itk_add_test(NAME itkGPUGradientAnisotropicDiffusionImageFilterTest
+        COMMAND ITKGPUCommonTestDriver itkGPUGradientAnisotropicDiffusionImageFilterTest
         ${ITK_SOURCE_DIR}/Examples/Data/BrainProtonDensitySlice.png
-        ${TEMP}/gpuGradientAnisotropicDiffusionImageFilterTest.png)
+        ${ITK_TEST_OUTPUT_DIR}/gpuGradientAnisotropicDiffusionImageFilterTest.png)
 
-#add_test(NAME itkGPUDemonsRegistrationFilterTest
-#        COMMAND ITK-GPUCommonTestDriver itkGPUDemonsRegistrationFilterTest
-#        ${ITK_SOURCE_DIR}/Examples/Data/BrainProtonDensitySlice.png
-#        ${TEMP}/gpuImageFilterTest.png
-#        ${TEMP}/output)
+itk_add_test(NAME itkGPUDemonsRegistrationFilterTest
+        COMMAND ITKGPUCommonTestDriver itkGPUDemonsRegistrationFilterTest
+        ${ITK_SOURCE_DIR}/Examples/Data/BrainProtonDensitySlice.png
+        ${ITK_TEST_OUTPUT_DIR}/gpuImageFilterTest.png
+        ${ITK_TEST_OUTPUT_DIR}/output)
 
 
 ENDIF(ITK_USE_GPU)

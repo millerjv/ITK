@@ -74,6 +74,8 @@ public:
   /** Standard class typedefs. */
   typedef GPUDemonsRegistrationFilter Self;
   typedef GPUPDEDeformableRegistrationFilter< TFixedImage, TMovingImage, TDeformationField,
+                                              TParentImageFilter > Superclass;
+  typedef GPUPDEDeformableRegistrationFilter< TFixedImage, TMovingImage, TDeformationField,
                                               TParentImageFilter > GPUSuperclass;
   typedef TParentImageFilter
   CPUSuperclass;

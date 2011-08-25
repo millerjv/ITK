@@ -18,6 +18,8 @@
 #ifndef __itkGPUDiscreteGaussianImageFilter_h
 #define __itkGPUDiscreteGaussianImageFilter_h
 
+#include "itkDiscreteGaussianImageFilter.h"
+
 #include "itkGPUImage.h"
 #include "itkGPUImageToImageFilter.h"
 #include "itkGPUNeighborhoodOperatorImageFilter.h"
